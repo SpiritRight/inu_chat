@@ -6,10 +6,10 @@ from dotenv import load_dotenv
 
 from llm import get_ai_response
 
-st.set_page_config(page_title="소득세 챗봇", page_icon="🤖")
+st.set_page_config(page_title="INUCHAT", page_icon="🤖")
 
-st.title("🤖 소득세 챗봇")
-st.caption("소득세에 관련된 모든것을 답해드립니다!")
+st.title("🤖 INU 챗봇")
+st.caption("인천대에 관련된 모든것을 답해드립니다!")
 
 load_dotenv()
 
@@ -23,7 +23,7 @@ for message in st.session_state.message_list:
 
 
 
-if user_question := st.chat_input(placeholder="소득세에 관련된 궁금한 내용들을 말씀해주세요!"):
+if user_question := st.chat_input(placeholder="인천대에 관련된 궁금한 내용들을 말씀해주세요!"):
     with st.chat_message("user"):
         st.write(user_question)
     st.session_state.message_list.append({"role": "user", "content": user_question})
