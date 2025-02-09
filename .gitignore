@@ -1,6 +1,5 @@
 .env
 __pycache__/
-requirements.txt
 venv/
 chroma_inu-new
 chroma_inu_new
