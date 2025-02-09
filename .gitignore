@@ -4,3 +4,5 @@ venv/
 chroma_inu-new
 chroma_inu_new
 chroma_inu
+Dockerfile
+.devcontainer
