@@ -32,4 +32,5 @@ if user_question := st.chat_input(placeholder="인천대에 관련된 궁금한 
         ai_response = get_ai_response(user_question)
         with st.chat_message("ai"):
             ai_message = st.write_stream(ai_response)
+            # print(st.session_state.message_list)
             st.session_state.message_list.append({"role": "ai", "content": ai_message})
