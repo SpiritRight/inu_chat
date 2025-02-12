@@ -29,7 +29,8 @@ def get_retriever():
     # index_name = 'law-table-index'
     # database = Chroma(collection_name='chroma-inu-new', persist_directory="./chroma_inu-new", embedding_function=embedding) # 학칙만
     database = Chroma(collection_name='chroma-inu-plus', persist_directory="./chroma_inu-plus", embedding_function=embedding) #학칙+장학금
-    retriever = database.as_retriever(search_kwargs={'k': 4})
+    retriever = database.as_retriever(search_kwargs={'k': 6})
+    
     return retriever
 
 def get_history_retriever():
@@ -65,13 +66,12 @@ def get_llm(model='gpt-4o-mini'):
 
 
 def get_dictionary_chain():
-    dictionary = ["사람을 나타내는 표현 -> 학생"]
+    dictionary = []
     llm = get_llm()
     prompt = ChatPromptTemplate.from_template(f"""
         사용자의 질문을 보고, 우리의 사전을 참고해서 사용자의 질문을 변경해주세요.
         만약 변경할 필요가 없다고 판단된다면, 사용자의 질문을 변경하지 않아도 됩니다.
         그런 경우에는 질문만 리턴해주세요
-        사전: {dictionary}
         
         질문: {{question}}
     """)
@@ -99,14 +99,13 @@ def get_rag_chain():
         "답변을 알 수 없다면 모른다고 답변해주세요"
         "답변을 제공할 때는 학칙 (XX조)에 따르면 이라고 시작하면서 답변해주세요"
         "장학금에 관련된 내용일 경우에는 '학칙에 따르면'을 제거하고 말해주세요"
-        # "세부 사항을 이야기할 때 <br>과 같은 mark를 제거하고 말해주세요."
-        # "(1),(2)와 같이 문단을 나눌 수 있다면 나눠서 보기 편하게 보여주세요."
-        "가능한 자세하게 답변을 해주세요."
+        "자세하게 답변을 해주세요."
         "(대학명) (학과명) 졸업학점은 (숫자)학점이다. 로 패턴을 고정해주세요."
         "XX학번이라고 하면 (20)XX학년 입학생이라 생각해주세요."
         "졸업요건을 물어볼 때 (대학)을 말하지 않고 학과만 말해도 (대학)은 알아서 찾아서 넣어주세요."
-        
-        # "3-4 문장정도의 짧은 내용의 답변을 원합니다"
+        "마냥 모른다고 하지 말고 좀 더 깊이 생각해서 사용자가 원하는 답에 도달할 수 있도록 해주세요."
+        "특정 기간을 물어보지 않으면 항상 최신의 정보를 바탕으로 이야기해주세요."
+        ""
         "\n\n"
         "{context}"
     )
