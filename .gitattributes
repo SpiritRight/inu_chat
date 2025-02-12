@@ -1,3 +1,1 @@
-chroma_inu-31M filter=lfs diff=lfs merge=lfs -text
-chroma_inu-31M/chroma.sqlite3 filter=lfs diff=lfs merge=lfs -text
-chroma_inu-31M/a8bdbc6c-1091-4fc1-bba6-1aaf13d7452e/data_level0.bin filter=lfs diff=lfs merge=lfs -text
+chroma_inu-31M/** filter=lfs diff=lfs merge=lfs -text
