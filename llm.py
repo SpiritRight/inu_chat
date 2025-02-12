@@ -28,7 +28,7 @@ def get_retriever():
     embedding = UpstageEmbeddings(model='solar-embedding-1-large')
     # index_name = 'law-table-index'
     # database = Chroma(collection_name='chroma-inu-new', persist_directory="./chroma_inu-new", embedding_function=embedding) # 학칙만
-    database = Chroma(collection_name='chroma-inu-plus', persist_directory="./chroma_inu-plus", embedding_function=embedding) #학칙+장학금
+    database = Chroma(collection_name='chroma-inu-31M', persist_directory="./chroma_inu-31M", embedding_function=embedding) #학칙+장학금
     retriever = database.as_retriever(search_kwargs={'k': 6})
     
     return retriever
